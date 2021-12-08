@@ -1,2 +1,12 @@
 # tildelete-updater
-Backend application that continuously check for new "Til Delete" matches and updated the Firestore database accordingly.
+
+<h3 align="center" size="2">Automate collection, processing and storage of new Til Delete data.<h3>
+
+## Features
+
+- Automatically retrieve new matches.
+- Verify and filter matches.
+- Extract match data.
+- Calculate team statistics.
+
+## Getting Started

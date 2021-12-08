@@ -1,0 +1,27 @@
+{
+  "name": "tildelete-updater",
+  "version": "1.0.0",
+  "description": "Backend application for updating Til Delete Firestore data.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/n-lundie/tildelete-updater.git"
+  },
+  "author": "n-lundie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/n-lundie/tildelete-updater/issues"
+  },
+  "homepage": "https://github.com/n-lundie/tildelete-updater#readme",
+  "devDependencies": {
+    "cz-conventional-changelog": "^3.3.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
