@@ -4,7 +4,11 @@
   "description": "Backend application for updating Til Delete Firestore data.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc",
+    "watch": "npx tsc --watch",
+    "start": "node ./build/index.js",
+    "start:dev": "npx tsc && node ./build/index.js"
   },
   "repository": {
     "type": "git",
@@ -17,7 +21,8 @@
   },
   "homepage": "https://github.com/n-lundie/tildelete-updater#readme",
   "devDependencies": {
-    "cz-conventional-changelog": "^3.3.0"
+    "cz-conventional-changelog": "^3.3.0",
+    "typescript": "^4.5.2"
   },
   "config": {
     "commitizen": {
