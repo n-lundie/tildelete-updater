@@ -12,5 +12,10 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./build"
-  }
+  },
+  "exclude": [
+    "jest.config.ts",
+    "src/*.test.ts",
+    "src/**/*.test.ts"
+  ]
 }

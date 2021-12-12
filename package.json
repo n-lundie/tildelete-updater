@@ -4,7 +4,8 @@
   "description": "Backend application for updating Til Delete Firestore data.",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --verbose --watch",
+    "test:watch": "jest --verbose --watch",
     "build": "npx tsc",
     "watch": "npx tsc --watch",
     "start": "node ./build/index.js",
