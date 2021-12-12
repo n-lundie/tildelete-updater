@@ -72,4 +72,12 @@ describe('UpdaterCore', () => {
     core.updateLastUpdate(111);
     expect(core.lastUpdate).toBe(111);
   });
+
+  it('should not add more than 20 items to recent results', () => {
+    for (let i = 0; i < 20; i++) {
+      core.addWin();
+    }
+
+    expect(core.statistics.recent.results.length).toBe(20);
+  });
 });
