@@ -21,6 +21,9 @@ export class UpdaterCore {
     }
     this.statistics.overall.currWinStreak++;
 
+    // Update longest win streak
+    this.updateLongestWinStreak();
+
     // Update recent match results
     if (this.statistics.recent.results.length === 20) {
       this.statistics.recent.results.shift();
@@ -66,6 +69,15 @@ export class UpdaterCore {
     this.statistics.recent.wins = newWins;
     this.statistics.recent.losses = newLosses;
     this.statistics.recent.winRate = newWinRate;
+  }
+
+  updateLongestWinStreak(): void {
+    const oldStreak = this.statistics.overall.longestWinStreak;
+    const currStreak = this.statistics.overall.currWinStreak;
+
+    if (currStreak > oldStreak) {
+      this.statistics.overall.longestWinStreak = currStreak;
+    }
   }
 
   updateLastUpdate(time: number): void {

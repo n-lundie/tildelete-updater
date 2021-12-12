@@ -22,7 +22,7 @@ const inputStats: IStatistics = {
 describe('UpdaterCore', () => {
   const core = new UpdaterCore(inputStats, 0);
 
-  it('should correctly add a win', () => {
+  it('should add a win', () => {
     core.addWin();
 
     expect(core.statistics.overall.matchesPlayed).toBe(1);
@@ -30,7 +30,7 @@ describe('UpdaterCore', () => {
     expect(core.statistics.recent.results[0]).toBe(1);
   });
 
-  it('should correctly add a loss', () => {
+  it('should add a loss', () => {
     core.addLoss();
 
     expect(core.statistics.overall.matchesPlayed).toBe(2);
@@ -38,7 +38,7 @@ describe('UpdaterCore', () => {
     expect(core.statistics.recent.results[1]).toBe(0);
   });
 
-  it('should correctly update streaks', () => {
+  it('should update streaks', () => {
     expect(core.statistics.overall.currWinStreak).toBe(0);
     expect(core.statistics.overall.currLossStreak).toBe(1);
     core.addLoss();
@@ -50,16 +50,22 @@ describe('UpdaterCore', () => {
     expect(core.statistics.overall.currLossStreak).toBe(0);
   });
 
-  it('should correctly calculate overall win rate', () => {
+  it('should calculate overall win rate', () => {
     core.calcWinRate();
     expect(core.statistics.overall.winRate).toBe(50);
   });
 
-  it('should correctly update recent statistics', () => {
+  it('should update recent statistics', () => {
     core.calcRecentResults();
     expect(core.statistics.recent.wins).toBe(3);
     expect(core.statistics.recent.losses).toBe(3);
     expect(core.statistics.recent.winRate).toBe(50);
+  });
+
+  it('should update longest win streak', () => {
+    expect(core.statistics.overall.longestWinStreak).toBe(2);
+    core.addWin();
+    expect(core.statistics.overall.longestWinStreak).toBe(3);
   });
 
   it('should correctly update "lastUpdated" timestamp', () => {
