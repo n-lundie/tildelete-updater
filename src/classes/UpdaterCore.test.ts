@@ -22,62 +22,98 @@ const inputStats: IStatistics = {
 describe('UpdaterCore', () => {
   const core = new UpdaterCore(inputStats, 0);
 
-  it('should add a win', () => {
-    core.addWin();
+  describe('overall', () => {
+    test('correctly add a win', () => {
+      core.addWin(); // 1:1
+      expect(core.statistics.overall.wins).toBe(1);
+    });
 
-    expect(core.statistics.overall.matchesPlayed).toBe(1);
-    expect(core.statistics.overall.wins).toBe(1);
-    expect(core.statistics.recent.results[0]).toBe(1);
+    test('correctly add a loss', () => {
+      core.addLoss(); // 1:2
+      expect(core.statistics.overall.losses).toBe(1);
+    });
+
+    test('correctly update matchesPlayed', () => {
+      expect(core.statistics.overall.matchesPlayed).toBe(2);
+    });
+
+    test('correctly update currWinStreak', () => {
+      expect(core.statistics.overall.currWinStreak).toBe(0);
+
+      for (let i = 0; i < 3; i++) core.addWin(); // 4:5
+
+      expect(core.statistics.overall.currWinStreak).toBe(3);
+      expect(core.statistics.overall.currLossStreak).toBe(0);
+    });
+
+    test('correctly update currLossStreak', () => {
+      expect(core.statistics.overall.currLossStreak).toBe(0);
+
+      for (let i = 0; i < 3; i++) core.addLoss(); // 4:8
+
+      expect(core.statistics.overall.currLossStreak).toBe(3);
+      expect(core.statistics.overall.currWinStreak).toBe(0);
+    });
+
+    test('correctly update longestWinStreak', () => {
+      expect(core.statistics.overall.longestWinStreak).toBe(3);
+
+      for (let i = 0; i < 5; i++) core.addWin(); // 9:13
+
+      expect(core.statistics.overall.longestWinStreak).toBe(5);
+    });
+
+    test('correctly calculate winRate', () => {
+      expect(core.statistics.overall.winRate).toBe(0);
+
+      core.calcWinRate();
+
+      expect(core.statistics.overall.winRate).toBe(69);
+    });
   });
 
-  it('should add a loss', () => {
-    core.addLoss();
+  describe('recent', () => {
+    test('correctly add results', () => {
+      expect(core.statistics.recent.results.length).toBe(13);
 
-    expect(core.statistics.overall.matchesPlayed).toBe(2);
-    expect(core.statistics.overall.losses).toBe(1);
-    expect(core.statistics.recent.results[1]).toBe(0);
-  });
+      const wins = core.statistics.recent.results.reduce(
+        (acc, curr) => acc + curr
+      );
 
-  it('should update streaks', () => {
-    expect(core.statistics.overall.currWinStreak).toBe(0);
-    expect(core.statistics.overall.currLossStreak).toBe(1);
-    core.addLoss();
-    core.addLoss();
-    expect(core.statistics.overall.currLossStreak).toBe(3);
-    core.addWin();
-    core.addWin();
-    expect(core.statistics.overall.currWinStreak).toBe(2);
-    expect(core.statistics.overall.currLossStreak).toBe(0);
-  });
+      expect(wins).toBe(9);
+    });
 
-  it('should calculate overall win rate', () => {
-    core.calcWinRate();
-    expect(core.statistics.overall.winRate).toBe(50);
-  });
+    test('limit number of results to 20', () => {
+      for (let i = 0; i < 9; i++) core.addLoss();
 
-  it('should update recent statistics', () => {
-    core.calcRecentResults();
-    expect(core.statistics.recent.wins).toBe(3);
-    expect(core.statistics.recent.losses).toBe(3);
-    expect(core.statistics.recent.winRate).toBe(50);
-  });
+      expect(core.statistics.recent.results.length).toBe(20);
+    });
 
-  it('should update longest win streak', () => {
-    expect(core.statistics.overall.longestWinStreak).toBe(2);
-    core.addWin();
-    expect(core.statistics.overall.longestWinStreak).toBe(3);
-  });
+    test('correctly remove results when at limit', () => {
+      const resultsCopy = [...core.statistics.recent.results];
+      resultsCopy.shift();
+      resultsCopy.push(1);
 
-  it('should correctly update "lastUpdated" timestamp', () => {
-    core.updateLastUpdate(111);
-    expect(core.lastUpdate).toBe(111);
-  });
-
-  it('should not add more than 20 items to recent results', () => {
-    for (let i = 0; i < 20; i++) {
       core.addWin();
-    }
+      expect(core.statistics.recent.results).toEqual(resultsCopy);
+    });
 
-    expect(core.statistics.recent.results.length).toBe(20);
+    test('correctly calculate wins, losses & winRate', () => {
+      core.calcRecentResults();
+
+      expect(core.statistics.recent.wins).toBe(8);
+      expect(core.statistics.recent.losses).toBe(12);
+      expect(core.statistics.recent.winRate).toBe(40);
+    });
+  });
+
+  describe('lastUpdate', () => {
+    test('correctly update lastUpdate value', () => {
+      expect(core.lastUpdate).toBe(0);
+
+      core.updateLastUpdate(1639361904);
+
+      expect(core.lastUpdate).toBe(1639361904);
+    });
   });
 });
