@@ -1,23 +1,5 @@
-import { UpdaterCore } from './UpdaterCore';
-import { IStatistics } from '../interfaces/IStatistics';
-
-const inputStats: IStatistics = {
-  overall: {
-    wins: 0,
-    losses: 0,
-    currWinStreak: 0,
-    currLossStreak: 0,
-    longestWinStreak: 0,
-    matchesPlayed: 0,
-    winRate: 0,
-  },
-  recent: {
-    wins: 0,
-    losses: 0,
-    winRate: 0,
-    results: [],
-  },
-};
+import { UpdaterCore } from '../classes/UpdaterCore';
+import * as inputStats from './mocks/inputStats.json';
 
 describe('UpdaterCore', () => {
   const core = new UpdaterCore(inputStats, 0);

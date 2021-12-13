@@ -1,0 +1,17 @@
+{
+  "overall": {
+    "wins": 0,
+    "losses": 0,
+    "currWinStreak": 0,
+    "currLossStreak": 0,
+    "longestWinStreak": 0,
+    "matchesPlayed": 0,
+    "winRate": 0
+  },
+  "recent": {
+    "wins": 0,
+    "losses": 0,
+    "winRate": 0,
+    "results": []
+  }
+}

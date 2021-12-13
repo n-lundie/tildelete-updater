@@ -8,8 +8,8 @@
     "test:watch": "jest --verbose --watch",
     "build": "npx tsc",
     "watch": "npx tsc --watch",
-    "start": "node ./build/index.js",
-    "start:dev": "npx tsc && node ./build/index.js"
+    "start": "node -r dotenv/config ./build/index.js",
+    "start:dev": "npx tsc && node -r dotenv/config ./build/index.js"
   },
   "repository": {
     "type": "git",
@@ -37,6 +37,8 @@
     }
   },
   "dependencies": {
-    "@google-cloud/firestore": "^5.0.1"
+    "@google-cloud/firestore": "^5.0.1",
+    "axios": "^0.24.0",
+    "dotenv": "^10.0.0"
   }
 }
