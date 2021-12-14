@@ -11,7 +11,8 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./build"
+    "outDir": "./build",
+    "resolveJsonModule": true
   },
   "exclude": [
     "jest.config.ts",

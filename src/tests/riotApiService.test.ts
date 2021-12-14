@@ -1,11 +1,10 @@
 import axios from 'axios';
-import { riotApiService } from '../services/riotApiService';
-import * as mockMatches from './mocks/matchIdArray.json';
+import riotApiService from '../services/riotApiService';
 import * as mockMatch from './mocks/matchIdArray.json';
-
-jest.mock('axios');
+import * as mockMatches from './mocks/matchIdArray.json';
 
 describe('riotApiService', () => {
+  jest.mock('axios');
   describe('getMatchIds', () => {
     const axiosRes = { data: mockMatches };
     (axios as unknown as jest.Mock).mockResolvedValue(axiosRes);
