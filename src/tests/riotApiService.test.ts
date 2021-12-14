@@ -1,23 +1,25 @@
 import axios from 'axios';
 import riotApiService from '../services/riotApiService';
-import * as mockMatch from './mocks/matchIdArray.json';
-import * as mockMatches from './mocks/matchIdArray.json';
+import * as mockMatch from './mocks/match.json';
+import * as mockMatchIds from './mocks/matchIdArray.json';
+
+jest.mock('axios');
+const matchIds: string[] = mockMatchIds as string[];
 
 describe('riotApiService', () => {
-  jest.mock('axios');
   describe('getMatchIds', () => {
-    const axiosRes = { data: mockMatches };
-    (axios as unknown as jest.Mock).mockResolvedValue(axiosRes);
+    const axiosRes = { data: matchIds };
+    (axios as unknown as jest.Mock).mockResolvedValueOnce(axiosRes);
 
     test('return array of match ids', async () => {
       const res = await riotApiService.getMatchIds(0);
-      expect(res).toEqual(mockMatches);
+      expect(res).toEqual(matchIds);
     });
   });
 
   describe('getMatch', () => {
     const axiosRes = { data: mockMatch };
-    (axios as unknown as jest.Mock).mockResolvedValue(axiosRes);
+    (axios as unknown as jest.Mock).mockResolvedValueOnce(axiosRes);
 
     test('return match data', async () => {
       const res = await riotApiService.getMatch('matchId');
