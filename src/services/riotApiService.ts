@@ -1,20 +1,23 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { IMatch } from '../interfaces/IMatch';
 
-const riotDevToken: string = process.env.RIOT_DEV_TOKEN!;
-const melkPuuid: string = process.env.MELK_PUUID!;
-
 const reqConfig: AxiosRequestConfig = {
   method: 'GET',
   headers: {
-    'X-Riot-Token': riotDevToken,
+    'X-Riot-Token': process.env.RIOT_DEV_TOKEN!,
   },
   url: 'https://europe.api.riotgames.com/lol/match/v5/matches',
 };
 
-const getMatchIds = async (startTime: number): Promise<string[]> => {
+const getMatchIds = async (
+  player: string,
+  startTime: number
+): Promise<string[]> => {
+  const puuid = process.env[`${player}_PUUID`];
+
   const config = { ...reqConfig };
-  config.url += `/by-puuid/${melkPuuid}/ids?startTime=${startTime}&count=100`;
+  config.url += `/by-puuid/${puuid}/ids?startTime=${startTime}&count=100`;
+
   const data = (await axios(config)).data;
 
   return data;
@@ -23,6 +26,7 @@ const getMatchIds = async (startTime: number): Promise<string[]> => {
 const getMatch = async (matchId: string): Promise<IMatch> => {
   const config = { ...reqConfig };
   config.url += `/${matchId}`;
+
   const data = (await axios(config)).data;
 
   return data;

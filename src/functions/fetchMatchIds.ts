@@ -1,7 +1,10 @@
 import riotApiService from '../services/riotApiService';
 
-const fetchMatchIds = async (startTime: number): Promise<string[]> => {
-  let matchIds = await riotApiService.getMatchIds(startTime);
+const fetchMatchIds = async (
+  player: string,
+  startTime: number
+): Promise<string[]> => {
+  let matchIds = await riotApiService.getMatchIds(player, startTime);
 
   if (matchIds.length > 19) {
     matchIds = matchIds.slice(-19).reverse();
