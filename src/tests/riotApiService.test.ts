@@ -1,10 +1,10 @@
 import axios from 'axios';
 import riotApiService from '../services/riotApiService';
 import * as mockMatch from './mocks/match.json';
-import * as mockMatchIds from './mocks/matchIdArray.json';
+import { matchArr100 } from './mocks/matchIdArray';
 
 jest.mock('axios');
-const matchIds: string[] = mockMatchIds as string[];
+const matchIds: string[] = matchArr100;
 
 describe('riotApiService', () => {
   describe('getMatchIds', () => {

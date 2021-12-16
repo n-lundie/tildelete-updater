@@ -4,8 +4,9 @@
   "description": "Backend application for updating Til Delete Firestore data.",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose",
-    "test:watch": "jest --verbose --watch",
+    "test": "jest",
+    "test:v": "jest --verbose",
+    "test:watch": "jest --watch",
     "build": "npx tsc",
     "watch": "npx tsc --watch",
     "start": "node -r dotenv/config ./build/index.js",

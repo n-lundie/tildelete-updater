@@ -12,9 +12,9 @@ const reqConfig: AxiosRequestConfig = {
   url: 'https://europe.api.riotgames.com/lol/match/v5/matches',
 };
 
-const getMatchIds = async (timestamp: number): Promise<string[]> => {
+const getMatchIds = async (startTime: number): Promise<string[]> => {
   const config = { ...reqConfig };
-  config.url += `/by-puuid/${melkPuuid}/ids?start=${timestamp}&count=100`;
+  config.url += `/by-puuid/${melkPuuid}/ids?startTime=${startTime}&count=100`;
   const data = (await axios(config)).data;
 
   return data;
