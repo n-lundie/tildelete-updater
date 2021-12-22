@@ -71,7 +71,7 @@ export class UpdaterCore {
     this.statistics.recent.winRate = newWinRate;
   }
 
-  updateLongestWinStreak(): void {
+  private updateLongestWinStreak(): void {
     const oldStreak = this.statistics.overall.longestWinStreak;
     const currStreak = this.statistics.overall.currWinStreak;
 

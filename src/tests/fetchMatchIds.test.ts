@@ -15,17 +15,17 @@ jest.mock('../services/riotApiService', () => {
 
 describe('fetchMatchIds', () => {
   test('call service function with given argument', async () => {
-    const res = await fetchMatchIds(25);
-    expect(riotApiService.getMatchIds).toBeCalledWith(25);
+    const res = await fetchMatchIds('MELK', 25);
+    expect(riotApiService.getMatchIds).toBeCalledWith('MELK', 25);
   });
 
   test('reduce list length to 20', async () => {
-    const res = await fetchMatchIds(0);
+    const res = await fetchMatchIds('MELK', 0);
     expect(res.length).toBe(19);
   });
 
   test('reverse list', async () => {
-    const res = await fetchMatchIds(0);
+    const res = await fetchMatchIds('MELK', 0);
     expect(res).toEqual(matchArr100.slice(-19).reverse());
   });
 });

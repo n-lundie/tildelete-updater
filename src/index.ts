@@ -1,7 +1,21 @@
-// import { Firestore } from '@google-cloud/firestore';
+import { UpdaterCore } from './classes/UpdaterCore';
+import { FStore } from './classes/FStore';
+import riotApiService from './services/riotApiService';
 
-// const db = new Firestore({
-//   projectId: 'tildelete-744e4',
-//   keyFilename:
-//     '/mnt/c/Users/Administrator/Downloads/tildelete-744e4-243bbba415c9.json',
-// });
+async function main() {
+  const store = new FStore();
+
+  const core = new UpdaterCore(
+    await store.getStats(),
+    await store.getTimestamp()
+  );
+
+  const matchIdList = await riotApiService.getMatchIds('MELK', core.lastUpdate);
+
+  if (matchIdList.length) {
+    const matchId = matchIdList[matchIdList.length - 1];
+    const match = await riotApiService.getMatch(matchId);
+  }
+}
+
+main();
