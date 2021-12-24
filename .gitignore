@@ -6,3 +6,6 @@ build
 
 # Ignore enviroment variables
 .env
+
+# Ignore .jest dir
+.jest
