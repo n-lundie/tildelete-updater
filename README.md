@@ -76,3 +76,5 @@
    `npm run build`
 
 7. Run app
+
+   `npm run start`
