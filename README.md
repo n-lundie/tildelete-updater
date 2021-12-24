@@ -29,8 +29,7 @@
 
    ```
    // API keys for Riot API
-   process.env.RIOT_DEV_TOKEN = '<api_key>'
-   process.env.RIOT_APP_TOKEN = '<api_key>'
+   process.env.RIOT_TOKEN = '<api_key>'
 
    // Player PUUID's for Riot API
    process.env.MELK_PUUID = '<puuid>'
@@ -53,8 +52,7 @@
 
    ```
    # API keys for Riot API
-   RIOT_DEV_TOKEN="<api_key>"
-   RIOT_APP_TOKEN="<api_key>"
+   RIOT_TOKEN="<api_key>"
 
    # Player PUUID's for Riot API
    MELK_PUUID="<puuid>"

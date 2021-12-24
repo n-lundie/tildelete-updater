@@ -23,7 +23,7 @@ describe('riotApiService', () => {
       const reqConfig: AxiosRequestConfig = {
         method: 'GET',
         headers: {
-          'X-Riot-Token': process.env.RIOT_DEV_TOKEN!,
+          'X-Riot-Token': process.env.RIOT_TOKEN!,
         },
         url: 'https://europe.api.riotgames.com/lol/match/v5/matches',
       };
