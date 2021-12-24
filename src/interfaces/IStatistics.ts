@@ -6,6 +6,8 @@ export interface IOverall {
   currLossStreak: number;
   longestWinStreak: number;
   winRate: number;
+  nearMisses: number;
+  deletions: number;
 }
 
 export interface IRecent {

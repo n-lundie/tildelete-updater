@@ -11,6 +11,11 @@ export class UpdaterCore {
   }
 
   addWin(): void {
+    // Check for near miss
+    if (this.statistics.overall.currLossStreak === 4) {
+      this.addNearMiss();
+    }
+
     // Update matches and win count
     this.statistics.overall.matchesPlayed++;
     this.statistics.overall.wins++;
@@ -30,6 +35,7 @@ export class UpdaterCore {
     }
     this.statistics.recent.results.push(1);
 
+    // Update win rates
     this.calcWinRate();
     this.calcRecentResults();
   }
@@ -51,6 +57,12 @@ export class UpdaterCore {
     }
     this.statistics.recent.results.push(0);
 
+    // Check for deletion
+    if (this.statistics.overall.currLossStreak === 5) {
+      this.addDeletion();
+    }
+
+    // Update win rates
     this.calcWinRate();
     this.calcRecentResults();
   }
@@ -84,6 +96,15 @@ export class UpdaterCore {
     if (currStreak > oldStreak) {
       this.statistics.overall.longestWinStreak = currStreak;
     }
+  }
+
+  private addNearMiss(): void {
+    this.statistics.overall.nearMisses++;
+  }
+
+  private addDeletion(): void {
+    this.statistics.overall.deletions++;
+    this.statistics.overall.currLossStreak = 0;
   }
 
   updateLastUpdate(time: number): void {

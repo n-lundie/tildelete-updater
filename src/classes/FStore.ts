@@ -64,6 +64,8 @@ export class FStore {
       matchesPlayed: 0,
       winRate: 0,
       wins: 0,
+      nearMisses: 0,
+      deletions: 0,
     };
 
     const recent: IRecent = {

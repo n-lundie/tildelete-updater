@@ -6,7 +6,9 @@
     "currLossStreak": 0,
     "longestWinStreak": 0,
     "matchesPlayed": 0,
-    "winRate": 0
+    "winRate": 0,
+    "nearMisses": 0,
+    "deletions": 0
   },
   "recent": {
     "wins": 0,

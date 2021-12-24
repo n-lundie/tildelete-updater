@@ -92,4 +92,29 @@ describe('UpdaterCore', () => {
       expect(core.lastUpdate).toBe(1639361904);
     });
   });
+
+  describe('addNearMiss', () => {
+    test('detect and calculate nearMisses', () => {
+      expect(core.statistics.overall.nearMisses).toBe(1);
+    });
+  });
+
+  describe('addDeletion', () => {
+    test('reset loss streak', () => {
+      expect(core.statistics.overall.currLossStreak).toBe(0);
+
+      for (let i = 0; i < 4; i++) {
+        core.addLoss();
+      }
+
+      expect(core.statistics.overall.currLossStreak).toBe(4);
+      core.addLoss();
+
+      expect(core.statistics.overall.currLossStreak).toBe(0);
+    });
+
+    test('detect and calculate deletions', () => {
+      expect(core.statistics.overall.deletions).toBe(2);
+    });
+  });
 });
