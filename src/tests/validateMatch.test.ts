@@ -1,5 +1,5 @@
 import validateMatch from '../functions/validateMatch';
-import * as match from './mocks/match.json';
+import * as match from './mocks/match-noEd.json';
 
 describe('validateMatch', () => {
   test('return true if all filters return true', () => {

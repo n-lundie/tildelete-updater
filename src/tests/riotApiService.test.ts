@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import riotApiService from '../services/riotApiService';
-import * as mockMatch from './mocks/match.json';
+import * as mockMatch from './mocks/match-noEd.json';
 import { matchArr100 } from './mocks/matchIdArray';
 
 jest.mock('axios');
