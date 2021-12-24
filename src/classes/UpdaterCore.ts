@@ -29,6 +29,9 @@ export class UpdaterCore {
       this.statistics.recent.results.shift();
     }
     this.statistics.recent.results.push(1);
+
+    this.calcWinRate();
+    this.calcRecentResults();
   }
 
   addLoss(): void {
@@ -47,9 +50,12 @@ export class UpdaterCore {
       this.statistics.recent.results.shift();
     }
     this.statistics.recent.results.push(0);
+
+    this.calcWinRate();
+    this.calcRecentResults();
   }
 
-  calcWinRate(): void {
+  private calcWinRate(): void {
     const { matchesPlayed, wins } = this.statistics.overall;
 
     const newWinRate = Math.floor((wins * 100) / matchesPlayed);
@@ -57,7 +63,7 @@ export class UpdaterCore {
     this.statistics.overall.winRate = newWinRate;
   }
 
-  calcRecentResults(): void {
+  private calcRecentResults(): void {
     const { results } = this.statistics.recent;
 
     // Calculate new values

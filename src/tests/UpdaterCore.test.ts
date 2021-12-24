@@ -46,10 +46,6 @@ describe('UpdaterCore', () => {
     });
 
     test('correctly calculate winRate', () => {
-      expect(core.statistics.overall.winRate).toBe(0);
-
-      core.calcWinRate();
-
       expect(core.statistics.overall.winRate).toBe(69);
     });
   });
@@ -81,8 +77,6 @@ describe('UpdaterCore', () => {
     });
 
     test('correctly calculate wins, losses & winRate', () => {
-      core.calcRecentResults();
-
       expect(core.statistics.recent.wins).toBe(8);
       expect(core.statistics.recent.losses).toBe(12);
       expect(core.statistics.recent.winRate).toBe(40);
