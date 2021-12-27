@@ -9,3 +9,9 @@ build
 
 # Ignore .jest dir
 .jest
+
+# Ignore gcp creds
+tildelete-744e4-243bbba415c9.json
+
+# Ignore gcp app.yaml
+app.yaml
