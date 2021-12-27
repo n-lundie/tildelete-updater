@@ -7,8 +7,6 @@ import riotApiService from './services/riotApiService';
 async function main() {
   const store = new FStore();
 
-  // await store.resetData();
-
   const core = new UpdaterCore(
     await store.getStats(),
     await store.getTimestamp()
