@@ -10,7 +10,6 @@ function validateMatch(match: IMatch): boolean {
 
   for (let filter of filters) {
     const conditionValid = filter(match);
-    console.log(filter.name, conditionValid);
     if (!conditionValid) {
       valid = false;
       break;

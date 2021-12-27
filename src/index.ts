@@ -16,7 +16,7 @@ async function main() {
 
   function runService() {
     console.clear();
-    console.log('start');
+    console.log('scanning');
     const timer = setInterval(async () => {
       const matchList = await riotApiService.getMatchIds(
         'MELK',
@@ -33,15 +33,15 @@ async function main() {
 
         const matchAnalysis = analyzeMatch(match);
 
-        let status = 'NOT ADDED';
+        let status = `${matchId}: INVALID`;
 
         if (matchAnalysis.valid) {
           if (matchAnalysis.win) {
             core.addWin();
-            status = 'WIN ADDED';
+            status = `${matchId}: VICTORY`;
           } else {
             core.addLoss();
-            status = 'LOSS ADDED';
+            status = `${matchId}: DEFEAT`;
           }
 
           store.saveMatch(match);
@@ -51,10 +51,7 @@ async function main() {
         core.updateLastUpdate(formatTime(endTime) + 1);
         store.syncTimestamp(core.lastUpdate);
 
-        console.log(matchAnalysis);
-        console.log(matchId);
-        console.log(core);
-        console.log(`\n${status}\n`);
+        console.log(status);
 
         setTimeout(runService, 5000);
       }
